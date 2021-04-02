@@ -1,18 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパー Webサービス" width="135" height="17" border="0" title="ホットペッパー Webサービス"></a>
+  </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+<script>
+//import { Options } from '../node_modules/vue-class-component/dist/vue-class-component';
+export default{
+  name:"App",
+  data(){
+    return{
 
-@Options({
-  components: {
-    HelloWorld,
+    }
   },
-})
-export default class App extends Vue {}
+  created(){
+    console.log("location");
+      const success = function(position){
+        console.log(position)
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+      }
+    navigator.geolocation.getCurrentPosition(success)
+  }
+}
 </script>
 
 <style>
