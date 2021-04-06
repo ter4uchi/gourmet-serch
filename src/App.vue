@@ -1,16 +1,17 @@
 <template>
   <div>
+    <p v-if="restraunts.length ==0">近くにお店はありませんでした</p>
     <div v-for="restraunt in restraunts" :key="restraunt.id" class='card'>
       <a :href="restraunt.urls.pc">
-        <table>
-          <tr>
-            <td>{{restraunt.name}}</td>
-            <td rowspan="2"><img :src="restraunt.logo_image"></td>
-          </tr>
-          <tr>
-            <td>{{restraunt.genre.name}}</td>
-          </tr>
-        </table>
+          <div class="card-image">
+            <img :src="restraunt.logo_image">
+          </div>
+          <div class="card-title">
+            <h3>{{restraunt.name}}</h3>
+          </div>
+          <div>
+            <p>{{restraunt.genre.name}}</p>
+          </div>
       </a>
     </div>
     Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a>
@@ -19,6 +20,7 @@
 
 <script>
 import jQuery from 'jquery';
+//import Card from '../../smartTemplate/src/components/Card.vue';
 
 export default{
   name:"App",
@@ -69,26 +71,37 @@ export default{
   justify-content: center;  /* 水平方向の中央寄せ */
 }
 .card{
-  margin: 4%;
-  height: 150px;
+  margin: 5%;
+  padding: 5%;
+  max-height: 150px;
+  position: relative;
   border-radius: 50px;
   background: #e0e0e0;
   box-shadow:  10px 10px 30px #bebebe,
               -10px -10px 30px #ffffff;
 }
 .card:active{
-  margin: 4%;
-  height: 150px;
+  margin: 5%;
+  padding: 5%;
+  height: auto;
   border-radius: 50px;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
-  box-shadow:  10px 10px 30px #bebebe,
+  box-shadow: 10px 10px 30px #bebebe,
               -10px -10px 30px #ffffff;
 }
-table{
-  margin: 10%;
+.card-image{
+  display: inline-block;
+  max-width: 30%;
+}
+image{
+  max-width: 100%;
+  max-height: auto;
+}
+.card-title{
+  display: inline-block;
+  width: 70%;
 }
 a{
-  display: block;
   text-decoration: none;
   color: #2c3e50;
 }
