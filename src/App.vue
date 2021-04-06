@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-if="restraunts.length ==0">近くにお店はありませんでした</p>
+    <p v-if="restrauntNumber==0">近くにお店はありませんでした</p>
     <div v-for="restraunt in restraunts" :key="restraunt.id" class='card'>
       <a :href="restraunt.urls.pc">
           <div class="card-image">
@@ -26,7 +26,7 @@ export default{
   name:"App",
   data(){
     return{
-      restraunts:null,
+      restraunts:[],
     }
   },
   mounted(){
@@ -55,6 +55,7 @@ export default{
   watch:{
     restraunts:function() {
       console.log(this.restraunts);
+      this.restrauntNumber = this.restraunts.length;
     }
   }
 }
