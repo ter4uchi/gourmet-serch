@@ -30,7 +30,7 @@ export default{
       const success = function(position){
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
-      const URL ="http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0336bf1d8a990721&lat="+lat+"&lng="+lng+"&range=2&order=4&format=jsonp&callback=callback";
+      const URL ="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0336bf1d8a990721&lat="+lat+"&lng="+lng+"&range=2&order=4&format=jsonp&callback=callback";
       jQuery.ajax({
         type: 'GET',
         url: URL,
