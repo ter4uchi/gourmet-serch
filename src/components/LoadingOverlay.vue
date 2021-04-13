@@ -1,20 +1,26 @@
 <template>
-    <div v-if="isLoading" class="overlay">
-        <div class="cv-spinner">
-            <span class="spinner"></span>
-        </div>
-    </div>
+    <div v-show="isNotFriend" class="overlay">
+        <h2 class="mozi">テラウチの知人ですか？</h2>
+        <h4 class="mozi">※本アプリはテラウチの知人のみ利用を許可しています</h4>
+        <input type="checkbox" @change="change" class="mozi"><span class="mozi">はい。知人です。</span>
+    </div> 
 </template>
 
-<script lang="ts">
+<script >
 
 export default {
     name:"LoadingOverlay",
-    props:{
-        isLoading:{
-            type:Boolean,
-            default:false,
-            required:true
+    data(){
+        return{
+            isNotFriend:true
+        }
+    },
+    created(){
+        console.log(this.isNotFriend);
+    },
+    methods: {
+        change(){
+            this.isNotFriend = false;
         }
     }
 }
@@ -26,28 +32,9 @@ export default {
     z-index: 100;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(100, 100, 100, 0.6);
 }
-.cv-spinner {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px #ddd solid;
-    border-top: 4px #2e93e6 solid;
-    border-radius: 50%;
-    animation: sp-anime 0.8s infinite linear;
-}
-@keyframes sp-anime {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-.is-hide {
-    display: none;
+.mozi{
+    color: rgba(0,180,255,1);
 }
 </style>

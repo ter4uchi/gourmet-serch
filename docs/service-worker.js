@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.e7d8aca84b39702452e19ad9dfa4d9ed.js"
+  "precache-manifest.0b5b6f4a841d1586b97dc15eaddf1191.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "gourmet-serch"});
