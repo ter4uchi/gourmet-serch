@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading-overlay class="over"/>
+    <!--<loading-overlay class="over"/>-->
     <p v-if="restrauntNumber==0">近くにお店はありませんでした</p>
     <div v-if="isNotFriend==true">
     <div v-for="restraunt in restraunts" :key="restraunt.id" class='card'>
@@ -29,7 +29,7 @@ import LoadingOverlay from './components/LoadingOverlay'
 export default{
   name:"App",
   components:{
-    LoadingOverlay
+    //LoadingOverlay
   },
   data(){
     return{
@@ -46,7 +46,7 @@ export default{
       const success = async function(position){
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        const URL ="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0336bf1d8a990721&lat="+lat+"&lng="+lng+"&range=2&order=4&count=100&format=jsonp&callback=callback";
+        const URL ="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0336bf1d8a990721&lat="+lat+"&lng="+lng+"&range=2&order=4&count=100&count=100&format=jsonp&callback=callback";
         jQuery.ajax({
           type: 'GET',
           url: URL,
@@ -103,6 +103,7 @@ export default{
 .card-image{
   display: inline-block;
   max-width: 30%;
+  vertical-align: middle;
 }
 image{
   max-width: auto;
@@ -111,6 +112,7 @@ image{
 .card-title{
   display: inline-block;
   width: 70%;
+  vertical-align: middle;
 }
 a{
   text-decoration: none;
