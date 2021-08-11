@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <!--<loading-overlay class="over"/>-->
+  <div id="app">
     <p v-if="restrauntNumber==0">近くにお店はありませんでした</p>
-    <div v-if="isNotFriend==true">
-    <div v-for="restraunt in restraunts" :key="restraunt.id" class='card'>
+    <div v-else v-for="restraunt in restraunts" :key="restraunt.id" class='card'>
       <a :href="restraunt.urls.pc">
           <div class="card-image">
             <img :src="restraunt.logo_image">
@@ -16,21 +14,15 @@
           </div>
       </a>
     </div>
-    </div>
-    Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a>
+    <div>Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a></div>
   </div>
 </template>
 
 <script>
 import jQuery from 'jquery';
-import LoadingOverlay from './components/LoadingOverlay'
-//import Card from '../../smartTemplate/src/components/Card.vue';
 
 export default{
   name:"App",
-  components:{
-    //LoadingOverlay
-  },
   data(){
     return{
       restraunts:[],
@@ -62,7 +54,6 @@ export default{
   },
   watch:{
     restraunts:function() {
-      console.log(this.restraunts);
       this.restrauntNumber = this.restraunts.length;
     }
   }
@@ -70,19 +61,20 @@ export default{
 </script>
 
 <style>
+div{
+  margin: 0;
+  padding: 0;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background: #DEDEDE;
-  /*
-  display: flex;            /* Flexboxを指定 
-  justify-content: center;  /* 水平方向の中央寄せ */
+  margin: 0;
 }
 .card{
-  margin: 5%;
+  margin: 20px;
   padding: 5%;
   max-height: 150px;
   position: relative;
@@ -92,9 +84,7 @@ export default{
               -10px -10px 30px #ffffff;
 }
 .card:active{
-  margin: 5%;
-  padding: 5%;
-  height: auto;
+
   border-radius: 50px;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
   box-shadow: 10px 10px 30px #cecece,
@@ -113,6 +103,7 @@ image{
   display: inline-block;
   width: 70%;
   vertical-align: middle;
+  font-size: 1rem;
 }
 a{
   text-decoration: none;
