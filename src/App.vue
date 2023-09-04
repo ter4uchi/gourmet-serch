@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <p v-if="restrauntNumber==0">近くにお店はありませんでした</p>
+    <p v-if="restraunts.length == 0">近くにお店はありませんでした</p>
     <div v-else v-for="restraunt in restraunts" :key="restraunt.id" class='card'>
       <a :href="restraunt.urls.pc">
           <div class="card-image">
@@ -18,46 +18,33 @@
   </div>
 </template>
 
-<script>
-import jQuery from 'jquery';
+<script lang="ts">
+import { defineComponent, onMounted } from 'vue';
 
-export default{
-  name:"App",
-  data(){
-    return{
-      restraunts:[],
-      isNotFriend:true
-    }
-  },
-  mounted(){
-    this.getData();
-  },
-  methods:{
-    getData(){
-      var self = this ;//eslint-disable-line
-      const success = async function(position){
+export default defineComponent({
+  setup(){
+    const restraunts: any = [];
+    onMounted(()=>{
+      navigator.geolocation.getCurrentPosition((position) =>{
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        const URL ="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0336bf1d8a990721&lat="+lat+"&lng="+lng+"&range=2&order=4&count=100&count=100&format=jsonp&callback=callback";
-        jQuery.ajax({
-          type: 'GET',
-          url: URL,
-          dataType: 'jsonp',
-          jsonpCallback:'callback',
-          success: out => {
-            self.restraunts = out.results.shop;
+        const url ="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0336bf1d8a990721&lat="+lat+"&lng="+lng+"&range=2&order=4&count=100&count=100&format=json";
+        fetch(url)
+        .then((res)=>{
+          return res.json();
+        })
+        .then((res)=>{
+          for(const r of res.shop){
+            restraunts.push(r);
           }
-        });
-      }
-      navigator.geolocation.getCurrentPosition(success);
-    }
-  },
-  watch:{
-    restraunts:function() {
-      this.restrauntNumber = this.restraunts.length;
+        })
+      });
+    })
+    return {
+      restraunts,
     }
   }
-}
+})
 </script>
 
 <style>
